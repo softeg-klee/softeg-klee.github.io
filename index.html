@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="rendez-vous" />
+	
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/roboto/v20/css/roboto.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/materialIcons/v121/css/materialIcons.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/use.fontawesome.com/releases/v5.15.4/css/all.min.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/ionicons@4.6.4-1/dist/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/quasar@1.17.7/dist/quasar.min.css" rel="stylesheet" type="text/css"/>
+		<link href="/rdvpref/vertigo-ui/static/css/vertigo-ui.css" rel="stylesheet" type="text/css"/>
+		
+		<script src="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/quasar@1.17.7/dist/quasar.ie.polyfills.umd.min.js"></script>
+		<script src="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+        
+        <script src="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/vue-cookies@1.7.4/vue-cookies.js"></script>
+    	<script src="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js" ></script>
+
+    
+	<link rel="stylesheet" href="/rdvpref/static/fonts/remixIcons/remixicon.css"/>
+    <link rel="stylesheet" href="/rdvpref/static/css/dsfr.min.css?t=462325"/>
+    <link rel="stylesheet" href="/rdvpref/static/css/rdvpref-dsfr.css?t=462325"/>
+    <link rel="stylesheet" href="/rdvpref/static/css/rdvpref-fo.css?t=462325"/>
+    <link rel="icon" href="/rdvpref/static/favicons/favicon.ico"/>
+    <link rel="icon" href="/rdvpref/static/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="/rdvpref/static/favicons/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="/rdvpref/static/favicons/manifest.webmanifest" crossorigin="use-credentials">
+    <script src="/rdvpref/static/js/rdvpref-fo.js?t=462325" ></script>
+    
+    <title>Renouvellement créneau</title>
+</head>
+
+<body class="mat desktop no-touch platform-mat bg-white">
+	
+	<div id="page">
+		<div class="row justify-center" v-cloak><section class="row col-12 content-body q-col-gutter-md q-layout-padding">
+			<div class="col-12">
+				<div class="column items-center">
+					<h1 v-pre>Renouvellement titre de séjour 78</h1>
+					<div class="row full-width justify-center">
+						<div class="fr-stepper col-xl-4 col-md-6 col-xs-12">
+							<p class="fr-stepper__title">
+								<span class="fr-stepper__state">Étape 3 sur 6</span>
+								Choisissez votre créneau
+							</p>
+							<div class="fr-stepper__steps" data-fr-current-step="3" data-fr-steps="6"></div>
+							<p class="fr-stepper__details">
+								<span class="fr-text--bold">Étape suivante : </span>Vos informations
+							</p>
+						</div>
+					</div>
+					<div class="row full-width justify-center" >
+					   <div class="col-xl-4 col-md-6 col-xs-12 q-mb-sm">
+                            
+        <div v-if="uiMessageStack.globalErrors && uiMessageStack.globalErrors.length > 0" class="fr-alert fr-alert--error fr-alert--sm">
+            <p v-for="message in uiMessageStack.globalErrors">{{message}}</p>
+        </div>
+        <div v-if="uiMessageStack.globalWarnings && uiMessageStack.globalWarnings.length > 0" class="fr-alert fr-alert--warning fr-alert--sm">
+                <p v-for="message in uiMessageStack.globalWarnings">{{message}}</p>
+        </div>
+        <div v-if="uiMessageStack.globalInfos && uiMessageStack.globalInfos.length > 0" class="fr-alert fr-alert--info fr-alert--sm">
+                <p v-for="message in uiMessageStack.globalInfos">{{message}}</p>
+        </div>
+        <div v-if="uiMessageStack.globalSuccess && uiMessageStack.globalSuccess.length > 0" class="fr-alert fr-alert--success fr-alert--sm">
+                <p v-for="message in uiMessageStack.globalSuccess">{{message}}</p>
+        </div>
+
+                        </div>
+					</div>
+					<div>
+						<h2>Choisissez votre créneau</h2>
+						
+					</div>
+					<div class="row full-width semainier justify-center">
+						
+						
+						
+						
+						
+						
+						
+						
+						<template v-if="!$q.screen.lt.sm">
+						    <q-btn padding="sm" outline color="primary" @click="httpPostAjax(&#39;_semainePrecedente&#39;, {})" icon="ri-arrow-left-s-line" class="navigationSemaine " :disable="vueData.critere.premierJour === vueData.critere.dateMin"
+						    title="semaine précédente" aria-label="semaine précédente"></q-btn>
+                            <rdv-choix-tranche 
+                                v-model="vueData.resa.trhId" :tranches="vueData.tranches" :premier-jour="vueData.critere.premierJour" 
+                                :premiere-dispo="vueData.critere.datePremiereDispo" :nombre-de-jour="6" :nombre-de-ligne="componentStates.blocSelection.displayedLines"
+                                @voir-prochaine-dispo="httpPostAjax(&#39;_prochaineDispo&#39;, {})" class="col-10" aria-live="polite"></rdv-choix-tranche> 
+                            <q-btn padding="sm" outline color="primary" @click="httpPostAjax(&#39;_semaineSuivante&#39;, {})" icon="ri-arrow-right-s-line" class="navigationSemaine " :disable="formatDateLocale(vueData.critere.premierJour, 'DD/MM/YYYY', 7) === vueData.critere.dateMax"
+                            title="semaine suivante" aria-label="semaine suivante"></q-btn>
+                        </template>
+						<template v-else>
+							<div class="row col-12">
+								<q-btn outline color="primary" @click="httpPostAjax(&#39;_semainePrecedente&#39;, {})" icon="ri-arrow-left-s-line" class="navigationSemaine" :disable="vueData.critere.premierJour === vueData.critere.dateMin"
+								title="semaine précédente" aria-label="semaine précédente"></q-btn>
+								<div class="col text-center" ><b>Semaine du <br/> {{ VUiExtensions.methods.formatDateLocale(vueData.critere.premierJour, 'DD/MM/YY')}} au {{ VUiExtensions.methods.formatDateLocale(vueData.critere.premierJour,  'DD/MM/YY', 6) }}</b></div>
+								<q-btn outline color="primary" @click="httpPostAjax(&#39;_semaineSuivante&#39;, {})" icon="ri-arrow-right-s-line" class="navigationSemaine" :disable="formatDateLocale(vueData.critere.premierJour, 'DD/MM/YYYY', 7) === vueData.critere.dateMax"
+								title="semaine suivante" aria-label="semaine suivante"></q-btn>
+							</div>
+							<div class="row col-12" >
+								<rdv-choix-tranche class="col-12" 
+									v-model="vueData.resa.trhId" :tranches="vueData.tranches" :premier-jour="vueData.critere.premierJour" 
+									:premiere-dispo="vueData.critere.datePremiereDispo" :nombre-de-jour="6" :nombre-de-ligne="componentStates.blocSelection.displayedLines"
+									@voir-prochaine-dispo="httpPostAjax(&#39;_prochaineDispo&#39;, {})" aria-live="polite"></rdv-choix-tranche>
+							</div> 
+						</template>
+					</div>
+					
+	<form action="#" method="post" autocomplete="off" spellcheck="false" accept-charset="UTF-8">
+		<div class="row justify-center q-mt-md q-gutter-md"><q-btn color="primary" outline type="a" href="/rdvpref/reservation/demarche/1000/cgu/">Précédent</q-btn><input type="hidden" name="vContext[resa][trhId]" v-bind:value="vueData.resa.trhId" />
+	<q-btn type="submit" formaction="_choisirBloc" label="Suivant" aria-label="Suivant" title="Suivant" :disabled="vueData.resa.trhId == null" color="primary">
+	</q-btn>
+</div>
+		<input type="hidden" name="CTX" v-bind:value="vueData.CTX">
+	</form>
+
+				</div>
+			</div>
+			
+		</section></div>
+	</div>
+	
+    
+	<script src="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/quasar@1.17.7/dist/quasar.umd.min.js"></script>
+    <script src="/rdvpref/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/quasar@1.17.7/dist/lang/fr.umd.min.js"></script>
+	<script src="/rdvpref/vertigo-ui/static/js/vertigo-ui.umd.min.js"></script>
+	
+	
+	
+    <script id="vui-init-data" type="application/json">
+    	{
+       		"vueData" : {
+  "critere": {
+    "dateMax": "24/10/2022",
+    "dateMin": "26/09/2022",
+    "premierJour": "26/09/2022",
+    "datePremiereDispo": ""
+  },
+  "resa": {
+    "trhId": null
+  },
+  "CTX": "7430bf98-78ef-4318-9db2-2bf2a46e8e56",
+  "tranches": [
+    {
+      "trhId": 1041,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 525
+    },
+    {
+      "trhId": 1042,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 540
+    },
+    {
+      "trhId": 1043,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 555
+    },
+    {
+      "trhId": 1044,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 570
+    },
+    {
+      "trhId": 1045,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 585
+    },
+    {
+      "trhId": 1046,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 600
+    },
+    {
+      "trhId": 1047,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 615
+    },
+    {
+      "trhId": 1048,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 630
+    },
+    {
+      "trhId": 1049,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 645
+    },
+    {
+      "trhId": 1050,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 660
+    },
+    {
+      "trhId": 1051,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 675
+    },
+    {
+      "trhId": 1052,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 690
+    },
+    {
+      "trhId": 1053,
+      "dateLocale": "29/09/2022",
+      "minutesDebut": 705
+    },
+    {
+      "trhId": 1060,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 510
+    },
+    {
+      "trhId": 1061,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 525
+    },
+    {
+      "trhId": 1062,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 540
+    },
+    {
+      "trhId": 1063,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 555
+    },
+    {
+      "trhId": 1064,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 570
+    },
+    {
+      "trhId": 1065,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 585
+    },
+    {
+      "trhId": 1066,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 600
+    },
+    {
+      "trhId": 1067,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 615
+    },
+    {
+      "trhId": 1068,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 630
+    },
+    {
+      "trhId": 1069,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 645
+    },
+    {
+      "trhId": 1070,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 660
+    },
+    {
+      "trhId": 1071,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 675
+    },
+    {
+      "trhId": 1072,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 690
+    },
+    {
+      "trhId": 1073,
+      "dateLocale": "30/09/2022",
+      "minutesDebut": 705
+    },
+    {
+      "trhId": 1080,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 840
+    },
+    {
+      "trhId": 1081,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 855
+    },
+    {
+      "trhId": 1082,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 870
+    },
+    {
+      "trhId": 1083,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 885
+    },
+    {
+      "trhId": 1084,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 900
+    },
+    {
+      "trhId": 1085,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 915
+    },
+    {
+      "trhId": 1086,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 930
+    },
+    {
+      "trhId": 1087,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 945
+    },
+    {
+      "trhId": 1088,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 960
+    },
+    {
+      "trhId": 1089,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 975
+    },
+    {
+      "trhId": 1090,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 990
+    },
+    {
+      "trhId": 1091,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 1005
+    },
+    {
+      "trhId": 1092,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 1020
+    },
+    {
+      "trhId": 1093,
+      "dateLocale": "03/10/2022",
+      "minutesDebut": 1035
+    }
+  ]
+},
+       		"componentStates" : {"blocSelection":{"displayedLines":6}},
+       		"uiMessageStack" : {"globalErrors":[],"globalInfos":[],"globalSuccess":[],"globalWarnings":[],"objectFieldErrors":{},"objectFieldInfos":{},"objectFieldWarnings":{}},
+            "authz" : [],
+			"vuiLang": "fr" 
+    	}
+	</script>
+
+	
+	<script src="/rdvpref/vertigo-ui/static/js/vertigo-ui-mpa.js"></script>
+
+	<script src="/rdvpref/static/fonts/remixIcons/remixicons.js"></script>    
+	<div></div>
+</body>
+
+</html>
